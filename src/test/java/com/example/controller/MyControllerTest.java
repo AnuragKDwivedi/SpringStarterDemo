@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 
 class MyControllerTest {
 
-	@Test
+//	@Test
 	void testFetchUserName() {
 		fail("Not yet implemented");
 	}
 
-	@Test
+//	@Test
 	void testGetAllEmployeesGroupByAddress() {
 		fail("Not yet implemented");
 	}

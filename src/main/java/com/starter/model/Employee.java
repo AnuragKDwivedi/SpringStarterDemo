@@ -1,12 +1,14 @@
-package com.example.model;
+package com.starter.model;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Data;
+import jakarta.persistence.OneToOne;
 
-//@Entity
-@Data
+@Entity
+//@Data
 public class Employee {
 
 	@Override
@@ -17,9 +19,13 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long Id;
 	public String name;
+	@OneToOne(cascade = CascadeType.ALL)
 	public Address address;
 	public int age;
 	public int salary;
+	
+	public Employee() {}
+	
 	public Employee(String name, Address address, int age, int salary) {
 		super();
 		this.name = name;
@@ -50,6 +56,12 @@ public class Employee {
 	}
 	public void setAge(int age) {
 		this.age = age;
+	}
+	public Long getId() {
+		return Id;
+	}
+	public void setId(Long id) {
+		Id = id;
 	}
 	
 	

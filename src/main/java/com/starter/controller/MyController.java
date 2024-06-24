@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.starter.controller;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.model.Address;
-import com.example.model.Employee;
-import com.example.service.MyService;
+import com.starter.model.Address;
+import com.starter.model.Employee;
+import com.starter.service.MyService;
 
 @RestController
 @RequestMapping("/api/v1")

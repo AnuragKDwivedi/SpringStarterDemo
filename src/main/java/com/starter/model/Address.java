@@ -1,4 +1,4 @@
-package com.example.model;
+package com.starter.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-//@Entity
+@Entity
 @Data
 public class Address {
 
@@ -14,6 +14,9 @@ public class Address {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	private String City;
+	private int pincode;
+	
+	public Address() {}
 
 	public String getCity() {
 		return City;
@@ -35,8 +38,6 @@ public class Address {
 	public void setPincode(int pincode) {
 		this.pincode = pincode;
 	}
-
-	private int pincode;
 
 	public Address(String City, int pincode) {
 		super();

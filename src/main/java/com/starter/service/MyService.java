@@ -1,6 +1,5 @@
-package com.example.service;
+package com.starter.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,17 +11,19 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import com.example.controller.MyController;
-import com.example.model.Address;
-import com.example.model.Employee;
-import com.example.repo.EmployeeRepository;
+import com.starter.model.Employee;
+import com.starter.repo.EmployeeRepository;
 
 
 @Service
 public class MyService {
 
+	private final EmployeeRepository employeeRepository;
+	
 	@Autowired
-	EmployeeRepository employeeRepository;
+	public MyService(EmployeeRepository employeeRepository) {
+		this.employeeRepository = employeeRepository;
+	}
 	
 	private static final Logger logger = LoggerFactory.getLogger(MyService.class);
 	
@@ -31,6 +32,7 @@ public class MyService {
 				.filter(emp -> validateEmployeeAge(emp))
 				.map(emp -> {
 				   try{
+					   logger.info("saving now");
 					   employeeRepository.save(emp);
 						logger.info("Employe saved in db.");
 						return emp;
@@ -47,23 +49,15 @@ public class MyService {
 	
 	@Cacheable(value="employee", sync=true)
 	public List<Employee> getEmpGroupByAddress() {
-		//List<Employee> employees = new ArrayList();
-		//Address add = new Address("Bangalore", 2141);
-		//Employee emp = new Employee("Anurag", add, 28);
-		//employees.add(emp);
-		//System.out.println("Setting data manually");
 		List<Employee> employees = employeeRepository.findAll();
 		employees.stream().collect(Collectors.groupingBy(e -> e.getAddress().getPincode(), 
 				Collectors.groupingBy(e-> e.getName(), Collectors.counting())));
+		logger.info("emp ->"+employees);
 		return employees;
 	}
 	
 	@CacheEvict(value="employee", allEntries=true)
 	public String deleteEmployeeFromCache() {
-		//List<Employee> employees = new ArrayList();
-		//Address add = new Address("Bangalore", 2141);
-		//Employee emp = new Employee("Anurag", add, 28);
-		//employees.add(emp);
 		System.out.println("Deleted data.");
 		//employeeRepository.findAll();
 		//employees.stream().collect(Collectors.groupingBy(e -> e.getAddress().getPincode(), Collectors.groupingBy(e-> e.getName(), Collectors.counting())));

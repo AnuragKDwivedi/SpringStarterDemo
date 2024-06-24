@@ -1,4 +1,4 @@
-package com.example.conf;
+package com.starter.conf;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.cache.CacheManager;
